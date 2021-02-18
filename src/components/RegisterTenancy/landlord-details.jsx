@@ -1,14 +1,25 @@
+// React Components
 import React, { useState } from "react";
-import PropTypes from "prop-types";
-import styles from "../RegisterTenancy/register-user.module.scss";
-import { isLandlord } from "./validation";
-import Input from "../Input";
-import Button from "../Button";
-import { UPDATE_LANDLORD_INFO } from "./constants";
 import axios from "axios";
+import PropTypes from "prop-types";
+// Styles
+import styles from "../RegisterTenancy/register-user.module.scss";
+
+// Validation
+import { isLandlord } from "./validation";
+
+// Constants
+import { UPDATE_LANDLORD_INFO } from "./constants";
+
+// Custom Components
+import Input from "../Input";
+import InputCheck from "../InputCheck";
+import Button from "../Button";
+import Loader from "react-loader-spinner";
 
 const LandlorDetails = ({ step, setStep, tenancy, setTenancy }) => {
   const [errors, setErrors] = useState({});
+  const [isProcessing, setProcessingTo] = useState(false);
 
   // Handle on change
   const handleLandlord = ({ target }) => {
@@ -21,11 +32,14 @@ const LandlorDetails = ({ step, setStep, tenancy, setTenancy }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const api_rimbo = process.env.REACT_APP_API_RIMBO;
+    // Production axios: `${api_rimbo}`;
+    // Development axios : "http://localhost:8080/api/tenancies"
 
     const errors = isLandlord(tenancy.landlordDetails);
     setErrors(errors);
     if (Object.keys(errors).length > 0) return;
 
+    setProcessingTo(true);
     await axios.post(`${api_rimbo}`, {
       // tenant
       tenantsName: tenancy.tenantDetails.tenantName,
@@ -36,6 +50,7 @@ const LandlorDetails = ({ step, setStep, tenancy, setTenancy }) => {
       agencyEmailPerson: tenancy.agencyEmailPerson,
       agencyContactPerson: tenancy.agencyContactPerson,
       agencyPhonePerson: tenancy.agencyPhonePerson,
+      isAgentAccepted: tenancy.landlordDetails.isAgentAccepted,
       // property
       rimboService: tenancy.propertyDetails.rimboService,
       rentalDuration: tenancy.propertyDetails.rentalDuration,
@@ -72,9 +87,6 @@ const LandlorDetails = ({ step, setStep, tenancy, setTenancy }) => {
             onChange={(e) => handleLandlord(e)}
             error={errors.landlordName}
           />
-        </div>
-
-        <div className={styles.FormRight}>
           <Input
             type="email"
             name="landlordEmail"
@@ -84,6 +96,9 @@ const LandlorDetails = ({ step, setStep, tenancy, setTenancy }) => {
             onChange={(e) => handleLandlord(e)}
             error={errors.landlordEmail}
           />
+        </div>
+
+        <div className={styles.FormRight}>
           <Input
             type="tel"
             name="landlordPhone"
@@ -95,12 +110,61 @@ const LandlorDetails = ({ step, setStep, tenancy, setTenancy }) => {
           />
         </div>
       </div>
+      <div className={styles.TermsContainer}>
+        <InputCheck
+          type="checkbox"
+          required
+          name="isAgentAccepted"
+          id="terms"
+          value={tenancy.landlordDetails.isAgentAccepted}
+          placeholder="Accept our terms and conditions"
+          onChange={(e) => handleLandlord(e)}
+          error={errors.isAgentAccepted}
+        />
+        <p>
+          By submitting this form, you understand and accept that we use your
+          information in accordance with our{" "}
+          <a
+            href="https://rimbo.rent/en/privacy-policy/"
+            target="_blank"
+            rel="noreferrer"
+            className="link-tag"
+          >
+            {" "}
+            privacy policy
+          </a>{" "}
+          and{" "}
+          <a
+            href="https://rimbo.rent/en/cookies-policy/"
+            target="_blank"
+            rel="noreferrer"
+            className="link-tag"
+          >
+            {" "}
+            cookies policy
+          </a>
+          .
+        </p>
+      </div>
 
       <div className={styles.ButtonContainer}>
         <Button onClick={() => setStep(step - 1)} type="button">
           Previous Step
         </Button>
-        <Button type="submit">Submit</Button>
+
+        {isProcessing ? (
+          <Loader
+            type="Puff"
+            color="#01d2cc"
+            height={50}
+            width={50}
+            timeout={3000} //3 secs
+          />
+        ) : (
+          <Button disabled={isProcessing} type="submit">
+            Submit
+          </Button>
+        )}
       </div>
     </form>
   );

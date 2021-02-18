@@ -16,7 +16,7 @@ const RegisterTenancy = () => {
           <p>Rimbo screens in 24 hours.</p>
           <p>Receive a response via email.</p>
         </div>
-        {step >= 5 ? (
+        {step === 0 || step === 1 || step === 2 || step === 3 ? (
           <h4>
             Step {step + 1} / {steps.length - 1} -{" "}
             <span>{steps[`${step}`].title}</span>

@@ -81,5 +81,8 @@ export const isLandlord = (values) => {
   if (values.landlordPhone && values.landlordPhone.length < 9) {
     errors.landlordPhone = "Enter valid phone number";
   }
+  if (!values.isAgentAccepted) {
+    errors.isAgentAccepted = "You must accept our Terms and Conditions";
+  }
   return errors;
 };

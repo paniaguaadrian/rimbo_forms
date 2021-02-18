@@ -27,6 +27,7 @@ export const DefaultTenancy = {
     landlordName: "",
     landlordEmail: "",
     landlordPhone: "",
+    isAgentAccepted: true,
   },
 };
 

@@ -39,8 +39,6 @@ const TenantDetails = ({ step, setStep, tenancy, setTenancy }) => {
             onChange={(e) => handleTenant(e)}
             error={errors.tenantName}
           />
-        </div>
-        <div className={styles.FormRight}>
           <Input
             type="email"
             name="tenantEmail"
@@ -50,6 +48,8 @@ const TenantDetails = ({ step, setStep, tenancy, setTenancy }) => {
             onChange={(e) => handleTenant(e)}
             error={errors.tenantEmail}
           />
+        </div>
+        <div className={styles.FormRight}>
           <Input
             type="text"
             name="tenantPhone"

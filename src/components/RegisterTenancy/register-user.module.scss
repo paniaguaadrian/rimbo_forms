@@ -17,7 +17,6 @@
     font-size: 1rem;
     padding: 0 3rem;
     margin-top: 0;
-    width: 50%;
   }
 
   h1,
@@ -200,6 +199,39 @@
       outline: none;
       background-color: none !important;
     }
+  }
+}
+
+.TermsContainer {
+  margin: 0 auto;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  // text-align: left;
+  width: 100%;
+  @include xl {
+    margin: 0 auto;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    // text-align: left;
+    width: 45%;
+  }
+
+  p {
+    text-align: left;
+    font-size: 1.2rem;
+    @include xl {
+      text-align: left;
+    }
+  }
+  a {
+    color: $tertiary-color;
+    font-weight: 600;
   }
 }
 
