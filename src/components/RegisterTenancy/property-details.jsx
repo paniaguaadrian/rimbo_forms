@@ -56,7 +56,7 @@ const PropertyDetails = ({ step, setStep, tenancy, setTenancy }) => {
             type="text"
             name="rentalDuration"
             value={tenancy.propertyDetails.rentalDuration}
-            label="Duration of the rental agreement (years)"
+            label="Duration rental agreement (years)"
             placeholder="Enter duration"
             onChange={(e) => handleAgency(e)}
             error={errors.rentalDuration}

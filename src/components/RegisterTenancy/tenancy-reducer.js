@@ -10,6 +10,7 @@ export const DefaultTenancy = {
   agencyEmailPerson: "",
   agencyContactPerson: "",
   agencyPhonePerson: "",
+
   tenantDetails: {
     tenantName: "",
     tenantPhone: "",
@@ -22,6 +23,9 @@ export const DefaultTenancy = {
     rentalPostalCode: "",
     monthlyRent: "",
     rentalAddress: "",
+    rentAmount: "",
+    rentDuration: "",
+    product: "",
   },
   landlordDetails: {
     landlordName: "",

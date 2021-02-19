@@ -1,7 +1,7 @@
 @import "../../styles/variables";
 @import "../../styles/breakpoint";
 
-.Input {
+.InputFile {
   margin-bottom: 3.5rem;
   font-family: Nunito, sans-serif;
   outline: none;
@@ -32,17 +32,18 @@
     height: 2.5em;
     width: 100%;
     padding: 0.4em 0.8em;
-    border-radius: 20px;
-    border: 1px solid $tertiary-color;
+    border-radius: none;
+    border: none;
     font-size: 1.4rem;
     margin-top: 1rem;
 
     @include xl {
       height: 2.3em;
-      width: 100%;
-      padding: 0.4em 0.8em;
-      border-radius: 25px;
-      border: 1px solid $tertiary-color;
+      width: 20rem;
+      padding: 0;
+
+      border-radius: none;
+      border-bottom: 1px solid $tertiary-color;
       font-size: 1rem;
       margin-top: 1rem;
     }
@@ -53,10 +54,6 @@
       outline: none;
     }
   }
-}
-
-.InputCheck {
-  color: red;
 }
 
 .InputErrorContainer {

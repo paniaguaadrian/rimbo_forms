@@ -31,8 +31,8 @@ const LandlorDetails = ({ step, setStep, tenancy, setTenancy }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const api_rimbo = process.env.REACT_APP_API_RIMBO;
-    // Production axios: `${api_rimbo}`;
+    const api_rimbo_tenancies = process.env.REACT_APP_API_RIMBO;
+    // Production axios: `${api_rimbo_tenancies}`;
     // Development axios : "http://localhost:8080/api/tenancies"
 
     const errors = isLandlord(tenancy.landlordDetails);
@@ -40,11 +40,11 @@ const LandlorDetails = ({ step, setStep, tenancy, setTenancy }) => {
     if (Object.keys(errors).length > 0) return;
 
     setProcessingTo(true);
-    await axios.post(`${api_rimbo}`, {
+    await axios.post(`${api_rimbo_tenancies}`, {
       // tenant
       tenantsName: tenancy.tenantDetails.tenantName,
       tenantsEmail: tenancy.tenantDetails.tenantEmail,
-      tenantsPhone: tenancy.tenantDetails.tenantsPhone,
+      tenantsPhone: tenancy.tenantDetails.tenantPhone,
       // agency, agent
       agencyName: tenancy.agencyName,
       agencyEmailPerson: tenancy.agencyEmailPerson,
